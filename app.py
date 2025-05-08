@@ -11,8 +11,8 @@ from chatbot import chat_with_groq  # Your chatbot logic
 # Load environment variables from .env file
 load_dotenv()
 
-app = Flask(__name__)
-CORS(app)
+app = Flask(__name__, static_url_path='/static', static_folder='static', template_folder='templates')
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # MongoDB connection from .env
 MONGO_URI = os.getenv("MONGO_URI")
@@ -76,4 +76,4 @@ def chat():
         return jsonify({"response": "An error occurred on the server."}), 500
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=10000)
