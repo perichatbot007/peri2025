@@ -91,7 +91,7 @@ async function handleLogin() {
   }
 
   try {
-    const response = await fetch("http://127.0.0.1:5000/login", {
+    const response = await fetch("/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ username: user, password: pass })
@@ -129,7 +129,7 @@ async function handleSignup() {
   }
 
   try {
-    const response = await fetch("http://127.0.0.1:5000/signin", {
+    const response = await fetch("/signin", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email, password: pass, confirm_password: cpass })
@@ -186,7 +186,7 @@ function sendMessage() {
   userMsg.textContent = message;
   currentConversation.appendChild(userMsg);
 
-  fetch("http://127.0.0.1:5000/chat", {
+  fetch("/chat", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ message })
