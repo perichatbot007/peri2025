@@ -186,6 +186,13 @@ function sendMessage() {
   userMsg.textContent = message;
   currentConversation.appendChild(userMsg);
 
+  // Add typing indicator
+  const typingIndicator = document.createElement('div');
+  typingIndicator.className = 'chat-message bot-message';
+  typingIndicator.textContent = 'Typing...';
+  currentConversation.appendChild(typingIndicator);
+
+  // Fetch bot response
   fetch("/chat", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -193,12 +200,14 @@ function sendMessage() {
   })
     .then(res => res.json())
     .then(data => {
+      typingIndicator.remove(); // remove "Typing..." message
       const botMsg = document.createElement('div');
       botMsg.className = 'chat-message bot-message';
-      botMsg.textContent = data.response || "No response.";
+      botMsg.innerHTML = data.response || "No response.";
       currentConversation.appendChild(botMsg);
     })
     .catch(err => {
+      typingIndicator.remove();
       const botMsg = document.createElement('div');
       botMsg.className = 'chat-message bot-message';
       botMsg.textContent = "Oops! Something went wrong.";
