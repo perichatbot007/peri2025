@@ -318,6 +318,14 @@ document.getElementById('formBackBtn').addEventListener('click', function (e) {
   showMainPage();
 });
 
+document.getElementById('mainLogo').addEventListener('click', function () {
+  showMainPage(false);  // Show the main page without adding to history
+});
+
+document.getElementById('chatLogo').addEventListener('click', function () {
+  showMainPage(false);  // Show the main page without adding to history
+});
+
 document.getElementById('aboutBtn').addEventListener('click', e => {
   e.preventDefault();
   showAboutPage();
